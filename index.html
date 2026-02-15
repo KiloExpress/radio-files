@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Kilo Express Radio</title>
+<meta charset="UTF-8">
+<title>Kilo Express Radio</title>
 </head>
+
 <body style="background:black;color:white;text-align:center;font-family:sans-serif">
 
 <h2>🎧 Kilo Express Radio</h2>
 
-<audio controls autoplay>
-  <source src="playlist.m3u" type="audio/mpeg">
-  Your browser does not support audio.
-</audio>
+<audio id="player" controls></audio>
+
+<script>
+const tracks = [
+  "Credit Punch - A Criminal Mind",
+  "Credit Punch - Backbone",
+  "Credit Punch - Ghetto Gangster",
+  "Credit Punch - SINNER ANTHEM",
+  "Credit Punch Ft Bobby Nolan - Gringo"
+  "Credit Punch Ft Bobby Nolan - Me No Asylum Seek"
+  
+];
+
+const player = document.getElementById("player");
+player.src = tracks[Math.floor(Math.random() * tracks.length)];
+
+player.addEventListener("ended", () => {
+  player.src = tracks[Math.floor(Math.random() * tracks.length)];
+  player.play();
+});
+</script>
+
+<p>Click play to start the stream</p>
 
 </body>
 </html>
