@@ -21,20 +21,20 @@ const tracks = [
 const player = document.getElementById("player");
 
 function playRandom() {
-  const track = tracks[Math.floor(Math.random() * tracks.length)];
-  player.src = track;
+  const next = tracks[Math.floor(Math.random() * tracks.length)];
+  player.src = next;
   player.play();
 }
 
 player.addEventListener("ended", playRandom);
 
-// Required user interaction for browsers
+// Browsers require a user click to start audio
 document.body.addEventListener("click", () => {
   if (player.paused) playRandom();
 }, { once: true });
 </script>
 
-<p>Click anywhere to start the radio</p>
+<p style="margin-top:20px;">Click anywhere to start the audio</p>
 
 </body>
 </html>
