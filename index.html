@@ -3,38 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <title>Kilo Express Radio</title>
+
+<style>
+body {
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #0ff;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 30px;
+}
+
+.radio {
+  max-width: 320px;
+  margin: auto;
+  padding: 25px;
+  border: 2px solid #0ff;
+  border-radius: 16px;
+  box-shadow:
+    0 0 20px #0ff,
+    0 0 40px rgba(0,255,255,0.5);
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 15px #0ff; }
+  50% { box-shadow: 0 0 40px #0ff; }
+  100% { box-shadow: 0 0 15px #0ff; }
+}
+
+h1 {
+  margin: 0 0 10px;
+  letter-spacing: 2px;
+}
+
+.display {
+  background: #000;
+  border: 1px solid #0ff;
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-shadow: 0 0 8px #0ff;
+}
+
+.track {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+button {
+  background: transparent;
+  border: 2px solid #0ff;
+  color: #0ff;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  text-shadow: 0 0 6px #0ff;
+  box-shadow: 0 0 15px #0ff;
+}
+
+button:hover {
+  background: #0ff;
+  color: #000;
+}
+</style>
 </head>
 
-<body style="background:black;color:white;text-align:center;font-family:sans-serif">
+<body>
 
-<h2>🎧 Kilo Express Radio</h2>
+<div class="radio">
+  <h1>KILO EXPRESS</h1>
 
-<audio id="player" controls preload="metadata"></audio>
+  <div class="display">
+    <div>NOW PLAYING</div>
+    <div class="track" id="trackName">—</div>
+  </div>
+
+  <button id="playBtn">▶ PLAY</button>
+</div>
+
+<audio id="player"></audio>
 
 <script>
 const tracks = [
-  "1.mp3",
-  "2.mp3",
-  "3.mp3"
+  { file: "1.mp3", name: "Kilo Express – Track 1" },
+  { file: "2.mp3", name: "Kilo Express – Track 2" },
+  { file: "3.mp3", name: "Kilo Express – Track 3" }
 ];
 
 const player = document.getElementById("player");
+const btn = document.getElementById("playBtn");
+const label = document.getElementById("trackName");
 
 function playRandom() {
-  const next = tracks[Math.floor(Math.random() * tracks.length)];
-  player.src = next;
+  const pick = tracks[Math.floor(Math.random() * tracks.length)];
+  player.src = pick.file;
+  label.textContent = pick.name;
   player.play();
 }
 
+btn.addEventListener("click", playRandom);
 player.addEventListener("ended", playRandom);
-
-// Browsers require a user click to start audio
-document.body.addEventListener("click", () => {
-  if (player.paused) playRandom();
-}, { once: true });
 </script>
-
-<p style="margin-top:20px;">Click anywhere to start the audio</p>
 
 </body>
 </html>
