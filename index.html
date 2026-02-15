@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kilo Express Radio</title>
+</head>
+
+<body style="background:black;color:white;text-align:center;font-family:sans-serif">
+
+<h2>🎧 Kilo Express Radio</h2>
+
+<audio id="player" controls preload="metadata"></audio>
+
 <script>
 const tracks = [
   "1.mp3",
@@ -8,15 +21,20 @@ const tracks = [
 const player = document.getElementById("player");
 
 function playRandom() {
-  const pick = tracks[Math.floor(Math.random() * tracks.length)];
-  player.src = pick;
+  const track = tracks[Math.floor(Math.random() * tracks.length)];
+  player.src = track;
   player.play();
 }
 
 player.addEventListener("ended", playRandom);
 
+// Required user interaction for browsers
 document.body.addEventListener("click", () => {
   if (player.paused) playRandom();
 }, { once: true });
 </script>
 
+<p>Click anywhere to start the radio</p>
+
+</body>
+</html>
